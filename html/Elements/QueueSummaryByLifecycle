@@ -67,6 +67,9 @@ for my $queue (@$queues) {
 
     $i++;
 </%PERL>
+
+<& /Elements/RT-Extension-QueueCategories-Tools:GroupHeader, Queue => $queue->{Name}, Span => scalar(@cur_statuses) &>
+
 <tr class="<% $i%2 ? 'oddline' : 'evenline'%>" >
 
 <td>
@@ -83,6 +86,8 @@ for my $queue (@$queues) {
 </table>
 % }
 <%INIT>
+$m->comp('/Elements/RT-Extension-QueueCategories-Tools:SortQueueArray', Queues => $queues);
+
 my $build_search_link = sub {
     my ($queue_name, $extra_query) = @_;
     $queue_name =~ s/(['\\])/\\$1/g; #'
